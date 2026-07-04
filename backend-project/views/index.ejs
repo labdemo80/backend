@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Items</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Items</h1>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <form action="/items" method="POST" class="item-form">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="text" name="description" placeholder="Description" />
+      <button type="submit">Add Item</button>
+    </form>
+
+    <% if (items.length === 0) { %>
+      <p class="empty">No items yet. Add one above.</p>
+    <% } else { %>
+      <ul class="item-list">
+        <% items.forEach(function(item) { %>
+          <li class="item-card">
+            <div class="item-info">
+              <strong><%= item.name %></strong>
+              <p><%= item.description %></p>
+            </div>
+            <div class="item-actions">
+              <a href="/items/<%= item._id %>/edit">Edit</a>
+              <form action="/items/<%= item._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Delete this item?');">
+                <button type="submit" class="danger">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>

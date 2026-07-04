@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Item</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Edit Item</h1>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <form action="/items/<%= item._id %>?_method=PUT" method="POST" class="item-form">
+      <input type="text" name="name" value="<%= item.name %>" required />
+      <input type="text" name="description" value="<%= item.description %>" />
+      <button type="submit">Save Changes</button>
+    </form>
+
+    <a href="/" class="back-link">&larr; Back to list</a>
+  </div>
+</body>
+</html>
